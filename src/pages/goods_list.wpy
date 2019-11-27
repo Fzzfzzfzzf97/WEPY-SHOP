@@ -1,0 +1,24 @@
+<!--  -->
+<template>
+  <view class='container'>
+      <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class  extends wepy.page {
+    config = {
+      navigationBarTitleText: "goodslist",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+  }
+</script>
+
+<style lang='less'>
+</style>

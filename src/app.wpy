@@ -4,7 +4,7 @@
 <script>
 import wepy from 'wepy';
 import 'wepy-async-function';
-import '@/mixins/baseAPI.js'
+import '@/mixins/baseAPI.js';
 export default class extends wepy.app {
     config = {
         pages: [
@@ -13,7 +13,8 @@ export default class extends wepy.app {
             'pages/tabs/search',
             'pages/tabs/cart',
             'pages/tabs/my',
-            'pages/goods_detail/main'
+            'pages/goods_detail/main',
+            'pages/goods_list'
         ],
         window: {
             backgroundTextStyle: 'dark',
@@ -26,37 +27,42 @@ export default class extends wepy.app {
                 {
                     pagePath: 'pages/tabs/home',
                     text: '首页',
-                    iconPath:'assets/icons/home.png',
-                    selectedIconPath:'assets/icons/home-active.png'
+                    iconPath: 'assets/icons/home.png',
+                    selectedIconPath: 'assets/icons/home-active.png'
                 },
                 {
                     pagePath: 'pages/tabs/cates',
                     text: '分类',
-                    iconPath:'assets/icons/cates.png',
-                    selectedIconPath:'assets/icons/cates-active.png'
+                    iconPath: 'assets/icons/cates.png',
+                    selectedIconPath: 'assets/icons/cates-active.png'
                 },
                 {
                     pagePath: 'pages/tabs/search',
                     text: '搜索',
-                    iconPath:'assets/icons/search.png',
-                    selectedIconPath:'assets/icons/search-active.png'
+                    iconPath: 'assets/icons/search.png',
+                    selectedIconPath: 'assets/icons/search-active.png'
                 },
                 {
                     pagePath: 'pages/tabs/cart',
                     text: '购物车',
-                    iconPath:'assets/icons/cart.png',
-                    selectedIconPath:'assets/icons/cart-active.png'
+                    iconPath: 'assets/icons/cart.png',
+                    selectedIconPath: 'assets/icons/cart-active.png'
                 },
                 {
                     pagePath: 'pages/tabs/my',
                     text: '我的',
-                    iconPath:'assets/icons/my.png',
-                    selectedIconPath:'assets/icons/my-active.png'
+                    iconPath: 'assets/icons/my.png',
+                    selectedIconPath: 'assets/icons/my-active.png'
                 }
             ],
-            color:"#949494",
-            selectedColor:"#C70005"
-
+            color: '#949494',
+            selectedColor: '#C70005'
+        },
+        usingComponents: {
+            // 徽章组件
+            'van-badge': './assets/vant/badge/index',
+            'van-badge-group': './assets/vant/badge-group/index',
+            "van-search": "./assets/vant/search/index"
         }
     };
 

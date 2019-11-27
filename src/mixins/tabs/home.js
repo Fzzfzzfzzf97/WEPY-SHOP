@@ -9,14 +9,23 @@ export default class extends wepy.mixin {
         interval: 2000,
         duration: 500,
         // 分类列表
-        cateItems: []
+        cateItems: [],
+        // 楼层数据
+        floorData: []
     };
 
-    methods = {};
+    methods = {
+        goGoodsList(url) {
+            wepy.navigateTo({
+                url: url
+            })
+        }
+    };
 
     onLoad() {
         this.getSwiperList();
         this.getCateItems();
+        this.getFloorData();
     }
 
     // 获取轮播图数据
@@ -33,6 +42,14 @@ export default class extends wepy.mixin {
     async getCateItems() {
         const { data: res } = await wepy.get('/home/catitems');
         this.cateItems = res.message;
+        this.$apply();
+    }
+
+    // 获取楼层参数
+    async getFloorData() {
+        const { data: res } = await wepy.get('/home/floordata');
+        this.floorData = res.message
+        console.log(this.floorData);
         this.$apply();
     }
 }

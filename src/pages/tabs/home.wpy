@@ -19,14 +19,26 @@
     </swiper>
 
     <!-- 分类区域 -->
-  <view class="cates">
-    <block wx:for="{{cateItems}}" wx:key="index">
-      <navigator url="/pages/tabs/cates" open-type="{{item.open_type}}" wx:if="{{item.navigator_url}}" hover-class="none">
-        <image src="{{item.image_src}}" />
-      </navigator>
-      <image src="{{item.image_src}}" wx:else/>
-    </block>
-  </view>
+    <view class="cates">
+      <block wx:for="{{cateItems}}" wx:key="index">
+        <navigator url="/pages/tabs/cates" open-type="{{item.open_type}}" wx:if="{{item.navigator_url}}" hover-class="none">
+          <image src="{{item.image_src}}" />
+        </navigator>
+        <image src="{{item.image_src}}" wx:else/>
+      </block>
+    </view>
+
+  <!-- 楼层区域 -->
+    <view class="floor-container">
+      <view class="floor-item" wx:for="{{floorData}}" wx:key="index">
+        <!-- 楼层的标题 -->
+        <image class="floor-item-title" src="{{item.floor_title.image_src}}"/>
+        <!-- 楼层的图片 -->
+        <view class="floor-img-box">
+          <image class="floor-item-pic" wx:for="{{item.product_list}}" wx:key="index" src="{{item.image_src}}" style="width: {{item.image_width}}rpx;" @tap="goGoodsList({{item.navigator_url}})"/>
+        </view>
+      </view>
+    </view>
   </div>
 </template>
 
@@ -62,5 +74,24 @@ swiper{
     height: 140rpx;
    }
 }
-
+.floor-container {
+  .floor-item {
+    .floor-item-title {
+      height: 50rpx;
+      width: 640rpx;
+      display: block;
+    }
+    .floor-img-box {
+      .floor-item-pic {
+        float: left;
+        height: 190rpx;
+        margin: 9rpx;
+        &:nth-child(1) {
+          height: 390rpx;
+          margin-left: 11rpx;
+        }
+      } 
+    }
+  }
+}
 </style>
