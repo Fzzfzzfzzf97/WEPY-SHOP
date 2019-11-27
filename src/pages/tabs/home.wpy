@@ -20,9 +20,12 @@
 
     <!-- 分类区域 -->
   <view class="cates">
-    <view wx:for="{{cateItems}}" wx:key="index">
-      <image src="{{item.image_src}}" />
-    </view>
+    <block wx:for="{{cateItems}}" wx:key="index">
+      <navigator url="/pages/tabs/cates" open-type="{{item.open_type}}" wx:if="{{item.navigator_url}}" hover-class="none">
+        <image src="{{item.image_src}}" />
+      </navigator>
+      <image src="{{item.image_src}}" wx:else/>
+    </block>
   </view>
   </div>
 </template>
@@ -82,21 +85,25 @@ export default class Index extends wepy.page {
 </script>
 
 <style lang='less'>
+page {
+  background-color: rgba(221, 221, 221, 0.363);
+  height: 1000rpx;
+}
 swiper{
   height: 350rpx;
   .swiperImg {
     width: 100%;
     height: 350rpx;
+    }
 }
 .cates {
-  display: flex!important;
+  display: flex;
   justify-content: space-around;
-  margin: 40rpx 0;
-}
-// .cates image {
-//     width: 128rpx;
-//     height: 140rpx;
-//   }
+  margin: 28rpx 0;
+  image {
+    width: 128rpx;
+    height: 140rpx;
+   }
 }
 
 </style>
