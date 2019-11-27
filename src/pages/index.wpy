@@ -1,0 +1,22 @@
+<!--  -->
+<template>
+  <view class='container'></view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "hahaha",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+  }
+</script>
+
+<style lang='less'>
+</style>

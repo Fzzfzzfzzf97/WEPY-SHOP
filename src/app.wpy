@@ -1,0 +1,33 @@
+<style lang="less">
+</style>
+
+<script>
+import wepy from 'wepy';
+import 'wepy-async-function';
+
+export default class extends wepy.app {
+    config = {
+        pages: ['pages/index'],
+        window: {
+            backgroundTextStyle: 'dark',
+            navigationBarBackgroundColor: '#2b4d6e',
+            navigationBarTitleText: 'uShop',
+            navigationBarTextStyle: 'white'
+        }
+    };
+
+    globalData = {
+        userInfo: null
+    };
+
+    constructor() {
+        super();
+        this.use('requestfix');
+        this.use('promisify');
+    }
+
+    onLaunch() {
+        console.log('小程序启动了');
+    }
+}
+</script>
