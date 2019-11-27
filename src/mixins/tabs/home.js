@@ -21,9 +21,7 @@ export default class extends wepy.mixin {
 
     // 获取轮播图数据
     async getSwiperList() {
-        const { data: res } = await wepy.request(
-            'https://www.zhengzhicheng.cn/api/public/v1/home/swiperdata'
-        );
+        const { data: res } = await wepy.get('/home/swiperdata');
         if (res.meta.status !== 200) {
             return wepy.baseToast("轮播图")
         }
@@ -33,9 +31,7 @@ export default class extends wepy.mixin {
 
     // 获取分类参数
     async getCateItems() {
-        const { data: res } = await wepy.request(
-            'https://www.zhengzhicheng.cn/api/public/v1/home/catitems'
-        );
+        const { data: res } = await wepy.get('/home/catitems');
         this.cateItems = res.message;
         this.$apply();
     }
