@@ -1,0 +1,102 @@
+<!--  -->
+<template>
+  <div class="container">
+    <!-- 轮播图区域 -->
+    <swiper
+      indicator-dots
+      autoplay
+      interval="4000"
+      duration="500"
+      circular
+    >
+      <block wx:for="{{swiperList}}" wx:key="*this">
+        <swiper-item>
+          <navigator url="{{item.navigator_url}}" open-type="navigate">
+            <image src="{{item.image_src}}" class="swiperImg">
+          </navigator>        
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- 分类区域 -->
+  <view class="cates">
+    <view wx:for="{{cateItems}}" wx:key="index">
+      <image src="{{item.image_src}}" />
+    </view>
+  </view>
+  </div>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+    config = {
+        navigationBarTitleText: 'u-Go 首页'
+    };
+
+    data = {
+      // 轮播图
+        swiperList: [],
+        vertical: false,
+        interval: 2000,
+        duration: 500,
+      // 分类参数
+        cateItems:[]
+    };
+
+    components = {};
+
+    methods = {};
+    onLoad() {
+        this.getSwiperList();
+        this.getCateItems();
+    }
+    // 获取轮播图数据
+    async getSwiperList() {
+        const { data: res } = await wepy.request(
+            'https://www.zhengzhicheng.cn/api/public/v1/home/swiperdata'
+        );
+        if(res.meta.status !==200) {
+          return wx.showToast({
+            title: '获取数据失败', //提示的内容,
+            icon: 'none', //图标,
+            duration: 2000, //延迟时间,
+            mask: true, //显示透明蒙层，防止触摸穿透,
+            success: res => {}
+          });
+        }
+        this.swiperList = res.message;
+        this.$apply();
+    }
+    
+    // 获取分类参数
+    async getCateItems(){
+        const { data: res } = await wepy.request(
+            'https://www.zhengzhicheng.cn/api/public/v1/home/catitems'
+        );
+        this.cateItems = res.message;
+        console.log(this.cateItems);
+        this.$apply();
+    }
+}
+</script>
+
+<style lang='less'>
+swiper{
+  height: 350rpx;
+  .swiperImg {
+    width: 100%;
+    height: 350rpx;
+}
+.cates {
+  display: flex!important;
+  justify-content: space-around;
+  margin: 40rpx 0;
+}
+// .cates image {
+//     width: 128rpx;
+//     height: 140rpx;
+//   }
+}
+
+</style>

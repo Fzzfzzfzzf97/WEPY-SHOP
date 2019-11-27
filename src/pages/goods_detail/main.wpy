@@ -1,0 +1,32 @@
+<!--  -->
+<template>
+  <view class='container'>main</view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Main extends wepy.page {
+    config = {
+      navigationBarTitleText: "u-Go 详情",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+
+    events = {};
+
+    watch = {};
+
+    computed = {};
+
+    onLoad() { };
+
+    onShow() { };
+  }
+</script>
+
+<style lang='less'>
+</style>

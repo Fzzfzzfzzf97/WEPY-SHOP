@@ -1,13 +1,13 @@
 <!--  -->
 <template>
-  <view class='container'></view>
+  <view class='container'>search</view>
 </template>
 
 <script>
   import wepy from 'wepy';
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: "hahaha",
+      navigationBarTitleText: "uGou 搜索",
     };
 
     data = {};

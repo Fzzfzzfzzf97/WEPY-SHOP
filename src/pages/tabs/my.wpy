@@ -1,0 +1,22 @@
+<!--  -->
+<template>
+  <view class='container'>my</view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "uGou 个人中心",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+  }
+</script>
+
+<style lang='less'>
+</style>

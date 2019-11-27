@@ -1,0 +1,32 @@
+<!--  -->
+<template>
+  <view class='container'>cates</view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Example extends wepy.page {
+    config = {
+      navigationBarTitleText: "uGou 商品分类",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+
+    events = {};
+
+    watch = {};
+
+    computed = {};
+
+    onLoad() { };
+
+    onShow() { };
+  }
+</script>
+
+<style lang='less'>
+</style>

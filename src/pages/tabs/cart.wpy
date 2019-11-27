@@ -1,0 +1,22 @@
+<!--  -->
+<template>
+  <view class='container'>cart</view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: "uGou 购物车",
+    };
+
+    data = {};
+
+    components = {};
+
+    methods = {};
+  }
+</script>
+
+<style lang='less'>
+</style>
