@@ -70,7 +70,9 @@ export default class extends wepy.app {
             'van-badge-group': './vendor/vant/badge-group/index',
             'van-search': './vendor/vant/search/index',
             'van-row': './vendor/vant/row/index',
-            'van-col': './vendor/vant/col/index'
+            'van-col': './vendor/vant/col/index',
+            "van-cell": "/vendor/vant/cell/index",
+            "van-cell-group": "/vendor/vant/cell-group/index"
         }
     };
 
@@ -81,6 +83,35 @@ export default class extends wepy.app {
         super();
         this.use('requestfix');
         this.use('promisify');
+        // 请求拦截器
+        this.intercept('request', {
+            // 发出请求时的回调函数
+            config(p) {
+                // 显示Loading
+                wepy.showLoading({
+                    title: '数据加载中...'
+                });
+                // 必须返回OBJECT参数对象，否则无法发送请求到服务端
+                return p;
+            },
+
+            // 请求成功后的回调函数
+            success(p) {
+                // 必须返回响应数据对象，否则后续无法对响应数据进行处理
+                return p;
+            },
+
+            //请求失败后的回调函数
+            fail(p) {
+                // 必须返回响应数据对象，否则后续无法对响应数据进行处理
+                return p;
+            },
+
+            // 请求完成时的回调函数(请求成功或失败都会被执行)
+            complete(p) {
+                wepy.hideLoading();
+            }
+        });
     }
 
     onLaunch() {

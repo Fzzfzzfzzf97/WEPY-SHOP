@@ -11,20 +11,8 @@
     };
 
     data = {};
-
-    components = {};
-
     methods = {};
-
-    events = {};
-
-    watch = {};
-
-    computed = {};
-
     onLoad() { };
-
-    onShow() { };
   }
 </script>
 
