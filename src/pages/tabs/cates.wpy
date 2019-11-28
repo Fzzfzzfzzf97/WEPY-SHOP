@@ -37,7 +37,7 @@ import wepy from 'wepy';
 import mix from '@/mixins/tabs/cates.js';
 export default class Example extends wepy.page {
     config = {
-        navigationBarTitleText: 'uGou 商品分类'
+        navigationBarTitleText: 'u-Go 商品分类'
     };
     mixins = [mix];
 }

@@ -41,7 +41,7 @@ import wepy from 'wepy';
 import mix from '@/mixins/tabs/search.js';
 export default class Index extends wepy.page {
     config = {
-        navigationBarTitleText: 'uGou 搜索'
+        navigationBarTitleText: 'u-Go 搜索'
     };
     mixins = [mix];
 }

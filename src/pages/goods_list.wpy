@@ -1,24 +1,46 @@
 <!--  -->
 <template>
-  <view class='container'>
-      123
+  <view class="container">
+    <block wx:for="{{goodslist}}" wx:key="{{item.goods_id}}">
+      <van-card num="{{item.goods_number}}" tag="{{item.goods_id%3==0?'Hot':''}}" price="{{item.goods_price}}" title="{{item.goods_name}}" thumb="{{item.goods_small_logo}}"/>
+      <view class="hrLine"></view>
+    </block>
+    <view class="over_line" hidden="{{!isOver}}">-------- 我是有底线的 --------</view>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy';
-  export default class  extends wepy.page {
+import wepy from 'wepy';
+import mix from '@/mixins/goods_list.js';
+export default class extends wepy.page {
     config = {
-      navigationBarTitleText: "goodslist",
+        navigationBarTitleText: 'u-Go 商品列表',
+        onReachBottomDistance: 100,
+        enablePullDownRefresh: true,
+        backgroundColor: '#E5EDEB'
     };
-
-    data = {};
-
-    components = {};
-
-    methods = {};
-  }
+    mixins = [mix];
+}
 </script>
 
 <style lang='less'>
+.hrLine {
+  height: 0;
+  width: 100%;
+  margin: 6rpx 0;
+  border-top: 2rpx solid rgba(121, 184, 173, 0.351);
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.over_line {
+  font-size: 24rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: snow;
+  background-color: rgba(121, 184, 173,.46);
+}
 </style>
