@@ -1,32 +1,80 @@
 <!--  -->
 <template>
-  <view class='container'>cates</view>
+  <view class="cates-container">
+    <!-- 左侧滚动视图区域 -->
+    <scroll-view scroll-y style="height:{{wh}}px;" class="left">
+      <van-badge-group active="{{ active }}" @change="onChange">
+        <van-badge title="{{item.cat_name}}" wx:for="{{cateList}}" wx:key="{{index}}"/>
+      </van-badge-group>
+    </scroll-view>
+
+
+    <!-- 右侧滚动视图区域 -->
+    <scroll-view class="right" scroll-y style="height: {{ wh }}px;">
+      <!-- 二级分类 -->
+      <block wx:for="{{ secondCate }}" wx:key="index">
+        <van-row>
+          <van-col span="24" style="text-align: center">
+            <text class="cate_title">{{ item.cat_name }}</text>
+          </van-col>
+        </van-row>
+        <!-- 三级分类 -->
+        <van-row>
+          <block wx:for="{{item.children}}" wx:key="index">
+            <van-col span="8" class="cell" @tap="goGoodsList({{item.cat_id}})">
+              <image src="{{item.cat_icon}}" class="thumbImg"/>
+              <view class="thumbTitle">{{item.cat_name}}</view>
+            </van-col>
+          </block>
+        </van-row>
+      </block>
+    </scroll-view>
+  </view>
 </template>
 
 <script>
-  import wepy from 'wepy';
-  export default class Example extends wepy.page {
+import wepy from 'wepy';
+import mix from '@/mixins/tabs/cates.js';
+export default class Example extends wepy.page {
     config = {
-      navigationBarTitleText: "uGou 商品分类",
+        navigationBarTitleText: 'uGou 商品分类'
     };
-
-    data = {};
-
-    components = {};
-
-    methods = {};
-
-    events = {};
-
-    watch = {};
-
-    computed = {};
-
-    onLoad() { };
-
-    onShow() { };
-  }
+    mixins = [mix];
+}
 </script>
 
-<style lang='less'>
+<style lang="less">
+.cates-container {
+  display: flex;
+
+  .left {
+    width: 85px;
+  }
+
+  .right {
+    .cate_title {
+      font-size: 33rpx;
+      font-weight: bold;
+      background-color: rgba(121, 184, 174, 0.568);
+      line-height: 80rpx;
+      width: 100%;
+      height: 80rpx;
+      display: inline-block;
+      margin: 30rpx 0 ;
+      color: snow;
+      letter-spacing: 8px;
+    }
+
+    .cell {
+      text-align: center;
+      font-size: 24rpx;
+      margin: 5rpx 0;
+      .thumbImg {
+        width: 120rpx;
+        height: 120rpx;
+      }
+    }
+  }
+
+}
 </style>

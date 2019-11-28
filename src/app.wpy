@@ -1,4 +1,9 @@
 <style lang="less">
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
 </style>
 
 <script>
@@ -57,13 +62,15 @@ export default class extends wepy.app {
             ],
             color: '#fff',
             selectedColor: '#51382a',
-            backgroundColor:'#87c3ba'
+            backgroundColor: '#87c3ba'
         },
         usingComponents: {
             // 徽章组件
             'van-badge': './vendor/vant/badge/index',
             'van-badge-group': './vendor/vant/badge-group/index',
-            "van-search": "./vendor/vant/search/index"
+            'van-search': './vendor/vant/search/index',
+            'van-row': './vendor/vant/row/index',
+            'van-col': './vendor/vant/col/index'
         }
     };
 
