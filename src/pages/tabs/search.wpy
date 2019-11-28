@@ -11,9 +11,27 @@
       bind:change="onChange"
     />
   </view>
-  <van-cell-group >
-    <block  wx:for="{{suggestList}}" wx:key="{{item.goods_id}}">
-      <van-cell title="{{item.goods_name}}" border="{{ true }}" @tap="goMain({{item.goods_id}})"/>
+  <!-- 搜索历史 -->
+  <view wx:if="{{isShowHistory}}" class="hostoryBox">
+    <van-row custom-class="cols">
+      <van-col span="12">搜索历史</van-col>
+      <van-col span="12" style="text-align: right" @tap="clearHistory">
+        <van-icon name="delete"/>
+      </van-col>
+    </van-row>
+    <block wx:for="{{kwList}}" wx:key="index">
+      <van-tag custom-class="tags" size="medium">{{item}}</van-tag>
+    </block>
+  </view>
+  <!-- 搜索内容 -->
+  <van-cell-group wx:else>
+    <block wx:for="{{suggestList}}" wx:key="{{item.goods_id}}">
+      <van-cell
+        title-class="color"
+        title="{{item.goods_name}}"
+        border="{{ true }}"
+        @tap="goMain({{item.goods_id}})"
+      />
     </block>
   </van-cell-group>
 </template>
@@ -30,4 +48,21 @@ export default class Index extends wepy.page {
 </script>
 
 <style lang='less'>
+page {
+    background: rgba(238, 238, 238, 0.425);
+}
+.color {
+    color: rgba(0, 0, 0, 0.692);
+}
+.hostoryBox {
+    padding: 0 16rpx;
+    .cols {
+        margin-top: 15rpx;
+        font-size: 28rpx;
+        color: rgba(0, 0, 0, 0.637);
+    }
+    .tags {
+        margin: 20rpx 10rpx;
+    }
+}
 </style>
