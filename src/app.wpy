@@ -18,7 +18,7 @@ export default class extends wepy.app {
         ],
         window: {
             backgroundTextStyle: 'dark',
-            navigationBarBackgroundColor: '#e08989',
+            navigationBarBackgroundColor: '#87c3ba',
             navigationBarTitleText: 'uShop',
             navigationBarTextStyle: 'white'
         },
@@ -55,8 +55,9 @@ export default class extends wepy.app {
                     selectedIconPath: 'assets/icons/my-active.png'
                 }
             ],
-            color: '#949494',
-            selectedColor: '#C70005'
+            color: '#fff',
+            selectedColor: '#51382a',
+            backgroundColor:'#87c3ba'
         },
         usingComponents: {
             // 徽章组件

@@ -11,7 +11,9 @@ export default class extends wepy.mixin {
         // 分类列表
         cateItems: [],
         // 楼层数据
-        floorData: []
+        floorData: [],
+        cateList: [],
+        secondCate: []
     };
 
     methods = {
@@ -26,6 +28,7 @@ export default class extends wepy.mixin {
         this.getSwiperList();
         this.getCateItems();
         this.getFloorData();
+        this.getCateList();
     }
 
     // 获取轮播图数据
@@ -47,9 +50,21 @@ export default class extends wepy.mixin {
 
     // 获取楼层参数
     async getFloorData() {
-        const { data: res } = await wepy.get('/home/floordata');
-        this.floorData = res.message
-        console.log(this.floorData);
-        this.$apply();
+            const { data: res } = await wepy.get('/home/floordata');
+            this.floorData = res.message
+                // console.log(this.floorData);
+            this.$apply();
+        }
+        // 获取分类参数
+    async getCateList() {
+        const { data: res } = await wepy.get('/categories')
+
+        if (res.meta.status !== 200) {
+            return wepy.baseToast()
+        }
+
+        this.cateList = res.message
+        this.secondCate = res.message[0].children
+        this.$apply()
     }
 }
