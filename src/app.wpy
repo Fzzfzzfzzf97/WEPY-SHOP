@@ -61,9 +61,9 @@ export default class extends wepy.app {
         },
         usingComponents: {
             // 徽章组件
-            'van-badge': './assets/vant/badge/index',
-            'van-badge-group': './assets/vant/badge-group/index',
-            "van-search": "./assets/vant/search/index"
+            'van-badge': './vendor/vant/badge/index',
+            'van-badge-group': './vendor/vant/badge-group/index',
+            "van-search": "./vendor/vant/search/index"
         }
     };
 
