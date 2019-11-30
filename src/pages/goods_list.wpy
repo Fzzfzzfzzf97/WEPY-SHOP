@@ -2,7 +2,7 @@
 <template>
   <view class="container">
     <block wx:for="{{goodslist}}" wx:key="{{item.goods_id}}">
-      <van-card num="{{item.goods_number}}" tag="{{item.goods_id%3==0?'Hot':''}}" price="{{item.goods_price}}" title="{{item.goods_name}}" thumb="{{item.goods_small_logo}}"/>
+      <van-card @tap="goGoodsDetail({{item.goods_id}})" num="{{item.goods_number}}" tag="{{item.goods_id%3==0?'Hot':''}}" price="{{item.goods_price}}" title="{{item.goods_name}}" thumb="{{item.goods_small_logo}}"/>
       <view class="hrLine"></view>
     </block>
     <view class="over_line" hidden="{{!isOver}}">-------- 我是有底线的 --------</view>

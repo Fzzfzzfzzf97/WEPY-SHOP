@@ -14,7 +14,9 @@ export default class extends wepy.mixin {
         isloading: false
     }
     methods = {
-
+            goGoodsDetail(id) {
+                wepy.navigateTo({ url: './goods_detail/main?goods_id=' + id });
+            }
         }
         // 获取商品列表数据
     async getGoodsList(cb) {
@@ -35,7 +37,8 @@ export default class extends wepy.mixin {
         this.total = res.message.total
             // 当数据请求完成后，将 isloading 重置为 false
         this.isloading = false
-        this.$apply()
+        this.$apply();
+        cb && cb();
     }
     onLoad(options) {
         this.query = options.query || ''
@@ -50,5 +53,17 @@ export default class extends wepy.mixin {
         console.log('触底了')
         this.pagenum++
             this.getGoodsList()
+    }
+    onPullDownRefresh() {
+        setTimeout(() => {
+            this.pagenum = 1;
+            this.total = 0;
+            this.goodslist = [];
+            this.isOver = this.isloading = false;
+            this.getGoodsList(() => {
+                wepy.stopPullDownRefresh();
+            });
+        }, 1000);
+
     }
 }

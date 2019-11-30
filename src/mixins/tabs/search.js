@@ -35,7 +35,7 @@ export default class extends wepy.mixin {
             }
             this.timer = setTimeout(() => {
                 this.getSuggestList(e.detail)
-            }, 500)
+            }, 800)
         },
         // 导航到商品详情页面
         goMain(id) {
@@ -57,12 +57,12 @@ export default class extends wepy.mixin {
     async getSuggestList(searchStr) {
         const { data: res } = await wepy.get('/goods/qsearch', { query: searchStr });
         this.suggestList = res.message;
-        console.log(this.suggestList)
+        // console.log(this.suggestList)
         this.$apply();
     };
     onShow() {
         const kwList = wx.getStorageSync('kw') || []
         this.kwList = kwList
-        console.log(this.kwList)
+            // console.log(this.kwList)
     };
 }
