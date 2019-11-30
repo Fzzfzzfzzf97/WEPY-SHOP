@@ -71,11 +71,16 @@ export default class extends wepy.app {
             'van-search': './vendor/vant/search/index',
             'van-row': './vendor/vant/row/index',
             'van-col': './vendor/vant/col/index',
-            "van-cell": "/vendor/vant/cell/index",
-            "van-cell-group": "/vendor/vant/cell-group/index",
-            "van-tag": "/vendor/vant/tag/index",
-            "van-icon": "/vendor/vant/icon/index",
-            'van-card': './vendor/vant/card/index'
+            'van-cell': '/vendor/vant/cell/index',
+            'van-cell-group': '/vendor/vant/cell-group/index',
+            'van-tag': '/vendor/vant/tag/index',
+            'van-icon': '/vendor/vant/icon/index',
+            'van-card': './vendor/vant/card/index',
+            'van-goods-action': './vendor/vant/goods-action/index',
+            'van-goods-action-icon': './vendor/vant/goods-action-icon/index',
+            'van-goods-action-button':'./vendor/vant/goods-action-button/index',
+            'van-tab': './vendor/vant/tab/index',
+            'van-tabs': './vendor/vant/tabs/index'
         }
     };
 
