@@ -42,7 +42,7 @@
       <view class="box3" @tap="chooseAddress">
           <view>
             <text>送至</text>
-            <text>请选择收货地址</text>
+            <text>{{addressInfo}}</text>
           </view>
           <van-icon name="arrow"></van-icon>
       </view>
@@ -74,9 +74,9 @@
 
     <!-- 底部加购物车  -->
     <van-goods-action custom-class="buyNow">
-      <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon"/>
-      <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon"/>
-      <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" custom-class="addCar"/>
+      <van-goods-action-icon icon="chat-o" text="客服" open-type="contact"/>
+      <van-goods-action-icon icon="cart-o" text="购物车" url="/pages/tabs/cart" link-type="switchTab"/>
+      <van-goods-action-button text="加入购物车" type="warning" bind:click="addToCart" custom-class="addCar"/>
       <van-goods-action-button text="立即购买" bind:click="onClickButton" custom-class="buyNow"/>
     </van-goods-action>
   </view>

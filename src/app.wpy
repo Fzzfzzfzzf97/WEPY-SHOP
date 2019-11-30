@@ -80,15 +80,49 @@ export default class extends wepy.app {
             'van-card': './vendor/vant/card/index',
             'van-goods-action': './vendor/vant/goods-action/index',
             'van-goods-action-icon': './vendor/vant/goods-action-icon/index',
-            'van-goods-action-button':'./vendor/vant/goods-action-button/index',
+            'van-goods-action-button':
+                './vendor/vant/goods-action-button/index',
             'van-tab': './vendor/vant/tab/index',
             'van-tabs': './vendor/vant/tabs/index'
         }
     };
 
+    // 专门存储全局共享的数据
+    // 只需要通过 this.$parent.globalData 就可以拿到这个全局共享的数据对象
     globalData = {
-        userInfo: null
+        // 全局的购物车列表
+        cart: []
     };
+    addGoodsToCart(goods) {
+        // if (i !== -1) {
+        //     this.globalData.cart[i].count++;
+        //     return;
+        // }
+        // 梳理出来的商品信息对象
+        const info = {
+            // 商品Id
+            id: goods.goods_id,
+            // 名称
+            name: goods.goods_name,
+            // 图片
+            pic: goods.goods_small_logo,
+            // 价格
+            price: goods.goods_price,
+            // 数量
+            count: 1,
+            // 是否默认被选中
+            isCheck: true
+        };
+        // 将整理出来的商品信息对象，存储到购物车列表中
+        this.globalData.cart.find(x => x.id === goods.goods_id && x.count++) ||
+            this.globalData.cart.push(info);
+        this.saveCartToStorage()
+        console.log(this.globalData.cart);
+    }
+    // 将购物车中的商品数据，持久化保存到本地
+    saveCartToStorage() {
+        wepy.setStorageSync('cart', this.globalData.cart);
+    }
     constructor() {
         super();
         this.use('requestfix');
@@ -126,6 +160,7 @@ export default class extends wepy.app {
 
     onLaunch() {
         console.log('小程序启动了');
+        this.globalData.cart = wepy.getStorageSync('cart') || []
     }
 }
 </script>

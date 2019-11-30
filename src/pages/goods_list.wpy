@@ -43,4 +43,8 @@ export default class extends wepy.page {
   color: snow;
   background-color: rgba(121, 184, 173,.46);
 }
+.van-card__price {
+  margin-top: 20rpx;
+  color: #79b8ac!important;
+}
 </style>

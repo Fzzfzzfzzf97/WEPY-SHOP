@@ -1,20 +1,16 @@
 <!--  -->
 <template>
-  <view class='container'>cart</view>
+  <view class='container'>{{msg.goods_cat}}</view>
 </template>
 
 <script>
   import wepy from 'wepy';
+  import mix from '@/mixins/tabs/cart.js';
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: "uGou 购物车",
     };
-
-    data = {};
-
-    components = {};
-
-    methods = {};
+    mixins = [mix];
   }
 </script>
 

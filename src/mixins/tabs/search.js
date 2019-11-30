@@ -45,7 +45,6 @@ export default class extends wepy.mixin {
         clearHistory() {
             this.kwList = [];
             wepy.setStorageSync('kw', []);
-
         }
     };
     computed = {
