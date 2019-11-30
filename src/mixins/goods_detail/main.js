@@ -8,7 +8,14 @@ export default class extends wepy.mixin {
     methods = {
         onClickIcon() {},
 
-        onClickButton() {}
+        onClickButton() {},
+        // 点击预览图片
+        preview(current) {
+            wepy.previewImage({
+                urls: this.goodsDetailList.pics.map(x => x.pics_big), //需要预览的图片链接列表,
+                current: current
+            });
+        }
     }
     onLoad(options) {
         this.goods_id = options.goods_id

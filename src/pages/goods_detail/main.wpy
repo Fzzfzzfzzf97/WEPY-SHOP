@@ -5,7 +5,7 @@
     <swiper indicator-dots circular>
       <block wx:for="{{ goodsDetailList.pics }}" wx:key="index">
         <swiper-item>
-          <image src="{{ item.pics_big }}" />
+          <image src="{{ item.pics_big }}" @tap="preview({{item.pics_big}})"/>
         </swiper-item>
       </block>
     </swiper>
@@ -51,8 +51,20 @@
 
     <!-- B标签页 -->
     <van-tabs active="{{ tabIndex }}" tab-active-class="tabColor">
-      <van-tab title="图文详情">内容 1</van-tab>
-      <van-tab title="规格参数">内容 2</van-tab>
+      <van-tab title="图文详情">
+        <!-- {{goodsDetailList.goods_introduce}} -->
+        <rich-text nodes="{{goodsDetailList.goods_introduce}}"></rich-text>
+        <!-- <wxparse data="{{goodsDetailList.goods_introduce}}"></wxparse> -->
+      </van-tab>
+      <van-tab title="规格参数" class="tab2">
+        
+        <block wx:for="{{ goodsDetailList.attrs }}" wx:key="index">
+          <van-row >
+            <van-col span="10">{{item.attr_name}}</van-col>
+            <van-col span="14">{{item.attr_value}}</van-col>
+          </van-row>
+        </block>
+      </van-tab>
     </van-tabs>
     
 
@@ -61,12 +73,12 @@
 
 
     <!-- 底部加购物车  -->
-    <!-- <van-goods-action custom-class="buyNow">
+    <van-goods-action custom-class="buyNow">
       <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon"/>
       <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon"/>
       <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" custom-class="addCar"/>
       <van-goods-action-button text="立即购买" bind:click="onClickButton" custom-class="buyNow"/>
-    </van-goods-action> -->
+    </van-goods-action>
   </view>
 </template>
 
@@ -84,6 +96,9 @@ export default class Main extends wepy.page {
 <style lang='less'>
 page{
   background-color: rgba(238, 238, 238, 0.315);
+}
+.container {
+  padding-bottom: 100rpx;
 }
 swiper {
   height: 680rpx;
@@ -141,7 +156,7 @@ swiper {
       }
     }
   }
-.box3 {
+  .box3 {
     display: flex;
     justify-content: space-between;
     font-size: 24rpx;
@@ -157,6 +172,27 @@ swiper {
     }
   }
 }
+.tab2 {
+  font-size: 24rpx;
+  color: rgb(87, 83, 83);
+  .van-row {
+    border-top: 1rpx solid rgba(121, 184, 173, 0.351);
+    .van-col {
+      padding: 25rpx 0 25rpx 10rpx;
+      &:nth-child(1) {
+        border-right: 1rpx solid  rgba(121, 184, 173, 0.351);
+      }
+    }
+  }
+}
+
+.van-tabs {
+  z-index: 0;
+}
+
+.goods_detail_container {
+  padding-bottom: 50px !important;
+}
 button.addCar{
   background-color: #cddbd7!important;
   border: none!important;
@@ -164,8 +200,9 @@ button.addCar{
 .buyNow{
   background-color: #79b8ac!important;
   border: none!important;
+  z-index: 999;
 }
-.tabColor {
-  // background-color: #79b8ac;
+.van-tabs__line {
+  background-color: #79b8ac!important;
 }
 </style>

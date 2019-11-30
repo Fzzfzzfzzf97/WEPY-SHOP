@@ -65,6 +65,8 @@ export default class extends wepy.app {
             backgroundColor: '#87c3ba'
         },
         usingComponents: {
+            // 把 HTML 代码转换为 WXML 代码的插件
+            wxparse: './vendor/wxparse/wxparse',
             // 徽章组件
             'van-badge': './vendor/vant/badge/index',
             'van-badge-group': './vendor/vant/badge-group/index',
