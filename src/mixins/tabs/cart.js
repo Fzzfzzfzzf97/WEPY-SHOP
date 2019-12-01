@@ -19,12 +19,21 @@ export default class extends wepy.mixin {
         },
         onChange() {
             this.checked = !this.checked;
+        },
+        // 监听商品数量变化
+        countChange(e) {
+            // console.log(e);
+            this.$parent.updateGoodsCount(e.target.dataset.id, e.detail)
+        },
+        // 商品选中状态会触发
+        statusChange(id, { detail: isChecked }) {
+            this.$parent.updateGoodsStatus(id, isChecked)
         }
     };
+
     onLoad() {}
     onShow() {
         this.cart = this.$parent.globalData.cart
-            // console.log(this.goodsList);
     }
     computed = {
         // 判断购物车是否为空

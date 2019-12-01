@@ -83,11 +83,12 @@ export default class extends wepy.app {
             'van-goods-action-button':'./vendor/vant/goods-action-button/index',
             'van-tab': './vendor/vant/tab/index',
             'van-tabs': './vendor/vant/tabs/index',
-            "van-button": "./vendor/vant/button/index",
-            "van-submit-bar": "./vendor/vant/submit-bar/index",
-            "van-checkbox": "./vendor/vant/checkbox/index",
-            "van-checkbox-group": "./vendor/vant/checkbox-group/index",
-            'van-stepper': './vendor/vant/stepper/index'
+            'van-button': './vendor/vant/button/index',
+            'van-submit-bar': './vendor/vant/submit-bar/index',
+            'van-checkbox': './vendor/vant/checkbox/index',
+            'van-checkbox-group': './vendor/vant/checkbox-group/index',
+            'van-stepper': './vendor/vant/stepper/index',
+            "van-swipe-cell": "./vendor/vant/swipe-cell/index"
         }
     };
 
@@ -120,12 +121,29 @@ export default class extends wepy.app {
         // 将整理出来的商品信息对象，存储到购物车列表中
         this.globalData.cart.find(x => x.id === goods.goods_id && x.count++) ||
             this.globalData.cart.push(info);
-        this.saveCartToStorage()
+        this.saveCartToStorage();
         console.log(this.globalData.cart);
     }
     // 将购物车中的商品数据，持久化保存到本地
     saveCartToStorage() {
         wepy.setStorageSync('cart', this.globalData.cart);
+    }
+    //改变商品数量
+    updateGoodsCount(id, count) {
+        const i = this.globalData.cart.findIndex(x => x.id === id);
+        if (i !== -1) {
+            this.globalData.cart[i].count = count;
+            this.saveCartToStorage();
+        }
+    }
+
+    // 更新商品状态
+    updateGoodsStatus(id,status) {
+        const i = this.globalData.cart.findIndex(x => x.id === id);
+        if (i !== -1) {
+            this.globalData.cart[i].isCheck = status;
+            this.saveCartToStorage();
+        }
     }
     constructor() {
         super();
@@ -164,7 +182,7 @@ export default class extends wepy.app {
 
     onLaunch() {
         console.log('小程序启动了');
-        this.globalData.cart = wepy.getStorageSync('cart') || []
+        this.globalData.cart = wepy.getStorageSync('cart') || [];
     }
 }
 </script>

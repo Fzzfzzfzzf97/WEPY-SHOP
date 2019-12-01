@@ -14,16 +14,28 @@
       </van-cell>
       <block wx:for="{{cart}}" wx:key="id">
         <!-- num="{{item.count}}" price="{{item.price}}" -->
-        <van-card price-class="price" title-class="title" title="{{item.name}}" thumb="{{item.pic}}">
-            <view slot="desc" class="desc">
-              <!-- 商品的价格 -->
-              <text class="price">￥{{item.price}}</text>
-              <!-- 商品的数量 -->
-              <van-stepper value="{{item.count}}" />
-            </view>
-        </van-card>
+        <!-- 删除滑块 -->
+        <van-swipe-cell right-width="{{ 65 }}" left-width="{{ .1 }}">
+          <van-card price-class="price" title-class="title" title="{{item.name}}">
+              <view slot="desc" class="desc">
+                <!-- 商品的价格 -->
+                <text class="price">￥{{item.price}}</text>
+                <!-- 商品的数量 -->
+                <van-stepper value="{{item.count}}" bind:change="countChange" data-id="{{item.id}}"/>
+              </view>
+              <!-- 自定义渲染缩略图的插槽 -->
+              <view slot="thumb" class="thumb">
+                <!-- 复选框 -->
+                <van-checkbox value="{{item.isCheck}}" checked-color="#79b8ac" bind:change="statusChange({{item.id}})"></van-checkbox>
+
+                <!-- 缩略图 -->
+                <image src="{{ item.pic }}" />
+              </view>
+          </van-card>
+          <view slot="right" class="close">删除</view>
+        </van-swipe-cell>
       </block>
-      
+
 
       <van-submit-bar 
         button-class="btn_color"
@@ -52,7 +64,18 @@
 
 <style lang='less'>
 page{
-  background-color: rgba(238, 238, 238, 0.507);
+  background-color: rgba(107, 171, 156,.2);
+}
+.close {
+  background-color: rgba(107, 171, 156);
+  // border-bottom: 22rpx solid #DAE6E3;
+  width: 65px;
+  height: 100%;
+  color: white;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .empty_cart {
   font-size: 26rpx;
@@ -92,5 +115,28 @@ page{
   .price {
     font-weight: bold;
   }
+}
+.van-card {
+  margin-bottom: 22rpx;
+}
+.container{
+  padding-bottom: 100rpx;
+}
+.van-cell{
+  background-color: rgba(248, 243, 243, 0.382)!important;
+}
+.thumb {
+  display: flex;
+  align-items: center;
+  width: 118px;
+
+  image {
+    width: 90px;
+    height: 90px;
+    margin-left: 8px;
+  }
+}
+.van-card__thumb {
+  width: 118px !important;
 }
 </style>
