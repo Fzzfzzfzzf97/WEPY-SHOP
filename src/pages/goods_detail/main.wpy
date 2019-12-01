@@ -75,7 +75,7 @@
     <!-- 底部加购物车  -->
     <van-goods-action custom-class="buyNow">
       <van-goods-action-icon icon="chat-o" text="客服" open-type="contact"/>
-      <van-goods-action-icon icon="cart-o" text="购物车" url="/pages/tabs/cart" link-type="switchTab"/>
+      <van-goods-action-icon icon="cart-o" text="购物车" url="/pages/tabs/cart" link-type="switchTab" info="{{total}}"/>
       <van-goods-action-button text="加入购物车" type="warning" bind:click="addToCart" custom-class="addCar"/>
       <van-goods-action-button text="立即购买" bind:click="onClickButton" custom-class="buyNow"/>
     </van-goods-action>
@@ -204,5 +204,9 @@ button.addCar{
 }
 .van-tabs__line {
   background-color: #79b8ac!important;
+}
+.van-info {
+  background-color: #79b8ac!important;
+  color: snow!important;
 }
 </style>

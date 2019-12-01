@@ -80,7 +80,8 @@ export default class extends wepy.app {
             'van-card': './vendor/vant/card/index',
             'van-goods-action': './vendor/vant/goods-action/index',
             'van-goods-action-icon': './vendor/vant/goods-action-icon/index',
-            'van-goods-action-button':'./vendor/vant/goods-action-button/index',
+            'van-goods-action-button':
+                './vendor/vant/goods-action-button/index',
             'van-tab': './vendor/vant/tab/index',
             'van-tabs': './vendor/vant/tabs/index',
             'van-button': './vendor/vant/button/index',
@@ -88,7 +89,8 @@ export default class extends wepy.app {
             'van-checkbox': './vendor/vant/checkbox/index',
             'van-checkbox-group': './vendor/vant/checkbox-group/index',
             'van-stepper': './vendor/vant/stepper/index',
-            "van-swipe-cell": "./vendor/vant/swipe-cell/index"
+            'van-swipe-cell': './vendor/vant/swipe-cell/index',
+            'van-dialog': './vendor/vant/dialog/index'
         }
     };
 
@@ -96,7 +98,9 @@ export default class extends wepy.app {
     // 只需要通过 this.$parent.globalData 就可以拿到这个全局共享的数据对象
     globalData = {
         // 全局的购物车列表
-        cart: []
+        cart: [],
+        // 当前购物车中已经勾选的商品数量
+        total: 0
     };
     addGoodsToCart(goods) {
         // if (i !== -1) {
@@ -122,11 +126,12 @@ export default class extends wepy.app {
         this.globalData.cart.find(x => x.id === goods.goods_id && x.count++) ||
             this.globalData.cart.push(info);
         this.saveCartToStorage();
-        console.log(this.globalData.cart);
+        // console.log(this.globalData.cart);
     }
     // 将购物车中的商品数据，持久化保存到本地
     saveCartToStorage() {
         wepy.setStorageSync('cart', this.globalData.cart);
+        this.renderCartBadge();
     }
     //改变商品数量
     updateGoodsCount(id, count) {
@@ -137,13 +142,52 @@ export default class extends wepy.app {
         }
     }
 
-    // 更新商品状态
-    updateGoodsStatus(id,status) {
+    // 根据ID更新商品状态
+    updateGoodsStatus(id, status) {
         const i = this.globalData.cart.findIndex(x => x.id === id);
         if (i !== -1) {
             this.globalData.cart[i].isCheck = status;
             this.saveCartToStorage();
         }
+    }
+
+    // 删除购物车商品
+    removeGoodsById(id) {
+        const i = this.globalData.cart.findIndex(x => x.id === id);
+        if (i !== -1) {
+            this.globalData.cart.splice(i, 1);
+            this.saveCartToStorage();
+        }
+        this.renderCartBadge();
+    }
+
+    // 切换商品全选状态
+    updateAllGoodsStatus(status) {
+        this.globalData.cart.forEach(x => {
+            x.isCheck = status;
+        });
+        this.saveCartToStorage();
+    }
+
+    // 渲染购物车徽章
+    async renderCartBadge() {
+        let c = 0
+        this.globalData.cart.forEach(x => {
+        if (x.isCheck) {
+            c += x.count
+        }
+        })
+
+        this.globalData.total = c
+
+        const res = await wepy.setTabBarBadge({
+        index: 3,
+        text: c + ''
+        }).catch(err => err)
+
+        // console.log(res)
+        // 设置 tabBar 的徽章失败
+        if (res.errMsg !== 'setTabBarBadge:ok') {}
     }
     constructor() {
         super();
@@ -183,6 +227,9 @@ export default class extends wepy.app {
     onLaunch() {
         console.log('小程序启动了');
         this.globalData.cart = wepy.getStorageSync('cart') || [];
+        this.renderCartBadge();
+    }
+    onShow(){
     }
 }
 </script>

@@ -4,21 +4,31 @@ export default class extends wepy.mixin {
 
     data = {
         cart: [],
-        checked: false
+        showDialog: false
     };
 
     components = {};
 
     methods = {
+        showDia() {
+            this.showDialog = true
+        },
         clearCart() {
             wepy.clearStorageSync('cart');
             this.cart = [];
+            this.showDialog = false
+                // this.$parent.saveCartToStorage();
+        },
+        cancelCart() {
+            this.showDialog = false;
         },
         onClickButton() {
 
         },
-        onChange() {
-            this.checked = !this.checked;
+        isAllChecked(e) {
+            // console.log(e.detail);
+
+            this.$parent.updateAllGoodsStatus(e.detail);
         },
         // 监听商品数量变化
         countChange(e) {
@@ -28,6 +38,9 @@ export default class extends wepy.mixin {
         // 商品选中状态会触发
         statusChange(id, { detail: isChecked }) {
             this.$parent.updateGoodsStatus(id, isChecked)
+        },
+        close(id) {
+            this.$parent.removeGoodsById(id)
         }
     };
 
@@ -42,6 +55,28 @@ export default class extends wepy.mixin {
                 return true
             }
             return false
+        },
+        // 总价格
+        amount() {
+            let total = 0;
+            this.cart.forEach(x => {
+                if (x.isCheck) {
+                    total += x.price * x.count
+                }
+            })
+            return total * 100;
+        },
+        // 计算全选
+        isFullChecked() {
+            // 获取所有商品个数
+            const allCount = this.cart.length;
+            let c = 0;
+            this.cart.forEach(x => {
+                if (x.isCheck) {
+                    c++;
+                }
+            })
+            return allCount === c;
         }
     }
 }

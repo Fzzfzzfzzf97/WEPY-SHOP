@@ -10,7 +10,7 @@
     <!-- 非空购物车 -->
     <view class="full_cart" wx:else>
       <van-cell title="购物车列表" icon="shopping-cart-o">
-        <van-button type="info" size="small" color="#79b8ac" bind:click="clearCart">清空</van-button>
+        <van-button type="info" size="small" color="#79b8ac" bind:click="showDia">清空</van-button>
       </van-cell>
       <block wx:for="{{cart}}" wx:key="id">
         <!-- num="{{item.count}}" price="{{item.price}}" -->
@@ -32,7 +32,7 @@
                 <image src="{{ item.pic }}" />
               </view>
           </van-card>
-          <view slot="right" class="close">删除</view>
+          <view slot="right" class="close" @tap="close({{item.id}})">删除</view>
         </van-swipe-cell>
       </block>
 
@@ -40,15 +40,29 @@
       <van-submit-bar 
         button-class="btn_color"
         price-class="allPrice"
-        price="{{ 3050 }}"
+        price="{{amount}}"
         button-text="提交订单"
         bind:submit="onClickButton"
         tip="{{ true }}"
       >
-      <van-checkbox checked-color="#79b8ac" value="{{ checked }}" bind:change="onChange" style="margin-left:16rpx;">全选</van-checkbox>
+      <!-- 全选复选框 -->
+      <van-checkbox checked-color="#79b8ac" value="{{ isFullChecked }}" bind:change="isAllChecked" style="margin-left:28rpx;">全选</van-checkbox>
       </van-submit-bar>
     </view>
   </view>
+
+
+  <!-- 删除确认弹出框 -->
+  <van-dialog
+    class="dialog"
+    use-slot
+    title="你确认清空购物车吗"
+    show="{{ showDialog }}"
+    show-cancel-button
+    bind:confirm="clearCart"
+    bind:cancel="cancelCart"
+  >
+  </van-dialog>
 </template>
 
 <script>
@@ -69,10 +83,10 @@ page{
 .close {
   background-color: rgba(107, 171, 156);
   // border-bottom: 22rpx solid #DAE6E3;
-  width: 65px;
+  width: 63px;
   height: 100%;
-  color: white;
-  font-size: 13px;
+  color: snow;
+  font-size: 28rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,5 +152,8 @@ page{
 }
 .van-card__thumb {
   width: 118px !important;
+}
+.dialog {
+  background-color: red!important;
 }
 </style>

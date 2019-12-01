@@ -47,4 +47,10 @@ export default class extends wepy.mixin {
         // console.log(this.goodsDetailList);
         this.$apply();
     }
+    computed = {
+        // 所有已经勾选的商品的数量
+        total() {
+            return this.$parent.globalData.total
+        }
+    }
 }
