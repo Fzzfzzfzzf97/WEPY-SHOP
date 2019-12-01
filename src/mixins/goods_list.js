@@ -50,7 +50,7 @@ export default class extends wepy.mixin {
             this.isOver = !this.isOver;
             return
         }
-        console.log('触底了')
+        // console.log('触底了')
         this.pagenum++
             this.getGoodsList()
     }

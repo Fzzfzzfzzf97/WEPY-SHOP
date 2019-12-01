@@ -1,12 +1,41 @@
 <!--  -->
 <template>
   <view class='container'>
-     <!-- 空白的购物车 -->
-    <view class="empty_cart">
+    <!-- 空白的购物车 -->
+    <view class="empty_cart" wx:if="{{isEmpty}}">
       <image src="/assets/cart_empty@2x.png" />
       <view>哎呦，购物车是空的噢~</view>
     </view>
 
+    <!-- 非空购物车 -->
+    <view class="full_cart" wx:else>
+      <van-cell title="购物车列表" icon="shopping-cart-o">
+        <van-button type="info" size="small" color="#79b8ac" bind:click="clearCart">清空</van-button>
+      </van-cell>
+      <block wx:for="{{cart}}" wx:key="id">
+        <!-- num="{{item.count}}" price="{{item.price}}" -->
+        <van-card price-class="price" title-class="title" title="{{item.name}}" thumb="{{item.pic}}">
+            <view slot="desc" class="desc">
+              <!-- 商品的价格 -->
+              <text class="price">￥{{item.price}}</text>
+              <!-- 商品的数量 -->
+              <van-stepper value="{{item.count}}" />
+            </view>
+        </van-card>
+      </block>
+      
+
+      <van-submit-bar 
+        button-class="btn_color"
+        price-class="allPrice"
+        price="{{ 3050 }}"
+        button-text="提交订单"
+        bind:submit="onClickButton"
+        tip="{{ true }}"
+      >
+      <van-checkbox checked-color="#79b8ac" value="{{ checked }}" bind:change="onChange" style="margin-left:16rpx;">全选</van-checkbox>
+      </van-submit-bar>
+    </view>
   </view>
 </template>
 
@@ -34,6 +63,34 @@ page{
     width: 180rpx;
     height: 180rpx;
     margin-bottom: 50rpx;
+  }
+}
+.price {
+    color: #6BAB9C!important;
+    font-size: 28rpx!important; 
+    margin-top: 12rpx;
+}
+.title {
+  color: rgb(87, 84, 84)!important;
+  font-weight: 400!important;
+}
+.btn_color {
+  background-color: rgba(107, 171, 156, 0.651)!important;
+  color: snow!important;
+  border: none!important;
+}
+.allPrice {
+  color: #6BAB9C!important;
+}
+.desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .price {
+    font-weight: bold;
   }
 }
 </style>

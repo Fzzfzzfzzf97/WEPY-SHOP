@@ -80,10 +80,14 @@ export default class extends wepy.app {
             'van-card': './vendor/vant/card/index',
             'van-goods-action': './vendor/vant/goods-action/index',
             'van-goods-action-icon': './vendor/vant/goods-action-icon/index',
-            'van-goods-action-button':
-                './vendor/vant/goods-action-button/index',
+            'van-goods-action-button':'./vendor/vant/goods-action-button/index',
             'van-tab': './vendor/vant/tab/index',
-            'van-tabs': './vendor/vant/tabs/index'
+            'van-tabs': './vendor/vant/tabs/index',
+            "van-button": "./vendor/vant/button/index",
+            "van-submit-bar": "./vendor/vant/submit-bar/index",
+            "van-checkbox": "./vendor/vant/checkbox/index",
+            "van-checkbox-group": "./vendor/vant/checkbox-group/index",
+            'van-stepper': './vendor/vant/stepper/index'
         }
     };
 

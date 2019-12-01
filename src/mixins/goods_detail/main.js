@@ -10,7 +10,7 @@ export default class extends wepy.mixin {
     methods = {
         // 加入购物车
         addToCart() {
-            console.log(this.$parent.globalData.cart);
+            // console.log(this.$parent.globalData.cart);
             wepy.showToast({
                 title: '加入购物车成功', //提示的内容,
                 icon: 'success', //图标,
