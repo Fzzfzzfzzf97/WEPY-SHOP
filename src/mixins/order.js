@@ -29,6 +29,9 @@ export default class extends wepy.mixin {
             wepy.setStorageSync('address', res)
             this.$apply()
             console.log(this.addressInfo)
+        },
+        currentUser(e) {
+            console.log(e);
         }
     }
     computed = {

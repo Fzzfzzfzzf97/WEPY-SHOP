@@ -29,7 +29,7 @@
         />
       </block>
     </view>
-    <van-button class="loginBtn">登 录 后 下 单</van-button>
+    <van-button class="loginBtn" open-type="getUserInfo" bindgetuserinfo="currentUser">您还没登录，请先登录</van-button>
   </view>
 </template>
 
