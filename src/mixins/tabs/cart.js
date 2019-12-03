@@ -10,6 +10,15 @@ export default class extends wepy.mixin {
     components = {};
 
     methods = {
+        submitOrder() {
+            if (this.amount <= 0) {
+                return wepy.baseToast('订单金额不能为空！')
+            }
+
+            wepy.navigateTo({
+                url: '/pages/order'
+            })
+        },
         showDia() {
             this.showDialog = true
         },

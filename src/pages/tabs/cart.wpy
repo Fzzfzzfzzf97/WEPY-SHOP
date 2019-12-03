@@ -42,7 +42,7 @@
         price-class="allPrice"
         price="{{amount}}"
         button-text="提交订单"
-        bind:submit="onClickButton"
+         bind:submit="submitOrder"
         tip="{{ true }}"
       >
       <!-- 全选复选框 -->

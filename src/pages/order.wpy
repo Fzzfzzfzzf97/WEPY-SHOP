@@ -1,0 +1,93 @@
+<template>
+  <view>
+    <!-- 收货人信息区域 -->
+    <view class="address_box" wx:if="{{isHaveAddress}}">
+          <!-- 收货人，联系电话 -->
+      <view class="box1">
+        <text>收货人：{{addressInfo.userName}}</text>
+        <view @tap="chooseAddress">
+          <text>联系电话：{{addressInfo.telNumber}}</text>
+        </view>
+      </view>
+      <!-- 收货地址 -->
+      <view class="box2">收货地址：{{addressStr}}</view>
+    </view>
+    <!-- 选择收货地址按钮区域 -->
+    <view class="choose_address_box" wx:else>
+      <van-button type="info" size="small" @tap="chooseAddress">+ 选择收货地址</van-button>
+    </view>
+    <!-- 分割线 -->
+    <image src="/assets/images/cart_border@2x.png" class="sep_line" />
+    <!-- 商品列表 -->
+    <view style="margin-top:15rpx;">
+      <block wx:for="{{cart}}" wx:key="*this">
+        <van-card
+          num="{{item.count}}"
+          price="{{item.price}}"
+          title="{{item.name}}"
+          thumb="{{ item.pic }}"
+        />
+      </block>
+    </view>
+    <van-button class="loginBtn">登 录 后 下 单</van-button>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import mix from '@/mixins/order.js'
+
+export default class extends wepy.page {
+  config = {
+    navigationBarTitleText: '确认订单'
+  }
+
+  mixins = [mix]
+}
+</script>
+
+<style lang="less">
+.choose_address_box {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.sep_line {
+  height: 7px;
+  width: 100%;
+  display: block;
+}
+.van-button{
+  background-color: #6BAB9C!important;
+  border: none!important;
+}
+.address_box {
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  color: #333;
+  .box1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx 0;
+  }
+  .box2 {
+    padding-bottom: 30rpx;
+  }
+}
+.van-card {
+  border-bottom: 10rpx solid rgba(107, 171, 156, 0.168);
+}
+.loginBtn {
+  position: fixed;
+  bottom: 0;
+  width: 100%!important;
+  border-radius: 0!important;
+}
+.van-button{
+  width: 100%!important;
+  border-radius: 0!important;
+  // border: none!important;
+  color: snow!important;
+  background-color: rgba(121, 184, 173, 0.666);
+}
+</style>
